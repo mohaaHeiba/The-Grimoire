@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "91651391747",
+    "project_id": "the-grimoire-95acd",
+    "storage_bucket": "the-grimoire-95acd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91651391747:android:82e2ccca734a8ff18a2936",
+        "android_client_info": {
+          "package_name": "com.example.the_grimoire"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBf95Rbq7paarKP0HmDr_nKxe6be03VQSg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
