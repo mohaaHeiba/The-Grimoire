@@ -11,7 +11,7 @@ Widget authheader(String title, BuildContext context) {
           width: MediaQuery.of(context).size.width * 0.6,
           height: MediaQuery.of(context).size.height * 0.2,
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 10),
         Expanded(
           child: Align(
             alignment: Alignment.topLeft,
@@ -19,7 +19,7 @@ Widget authheader(String title, BuildContext context) {
               '$title',
               style: TextStyle(
                 color: AppColors.textColor,
-                fontSize: 28,
+                fontSize: 26,
                 fontWeight: FontWeight.bold,
               ),
             ),
