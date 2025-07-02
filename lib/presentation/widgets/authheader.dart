@@ -6,17 +6,21 @@ Widget authheader(String title, BuildContext context) {
     padding: EdgeInsetsGeometry.all(25),
     child: Column(
       children: [
-        Image.asset(
-          'images/1.png',
-          width: MediaQuery.of(context).size.width * 0.6,
-          height: MediaQuery.of(context).size.height * 0.2,
+        Expanded(
+          flex: 12,
+          child: Image.asset(
+            'images/1.png',
+            width: MediaQuery.of(context).size.width * 0.6,
+            height: MediaQuery.of(context).size.height * 0.2,
+          ),
         ),
         const SizedBox(height: 10),
         Expanded(
+          flex: 5,
           child: Align(
             alignment: Alignment.topLeft,
             child: Text(
-              '$title',
+              title,
               style: TextStyle(
                 color: AppColors.textColor,
                 fontSize: 26,
