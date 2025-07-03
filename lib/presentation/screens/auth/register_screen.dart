@@ -4,7 +4,6 @@ import 'package:the_grimoire/presentation/screens/home.dart';
 import 'package:the_grimoire/presentation/themes/colors.dart';
 import 'package:the_grimoire/presentation/widgets/authformfield.dart';
 import 'package:the_grimoire/presentation/widgets/authheader.dart';
-
 import 'package:the_grimoire/domain/controllers/auth_controller.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -42,7 +41,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         email.isEmpty ||
         password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please fill in all fields')),
+        const SnackBar(content: Text('Please fill in all fields'),backgroundColor: AppColors.alert,),
       );
       return;
     }
@@ -54,11 +53,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
         email: email,
         password: password,
       );
+        ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Registration successful'),backgroundColor: AppColors.success,));
      Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => const Home()));
     } catch (e) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text('Registration failed: $e')));
+      ).showSnackBar(SnackBar(content: Text('Registration failed: $e'),backgroundColor: AppColors.alert,));
     }
   }
 
@@ -66,10 +68,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-    
+    resizeToAvoidBottomInset: true,
       backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
+          
           child:
               
               Padding(

@@ -3,7 +3,6 @@ import 'package:the_grimoire/presentation/screens/auth/register_screen.dart';
 import 'package:the_grimoire/presentation/themes/colors.dart';
 import 'package:the_grimoire/presentation/widgets/authformfield.dart';
 import 'package:the_grimoire/presentation/widgets/authheader.dart';
-import 'package:the_grimoire/data/services/auth_service.dart';
 import 'package:the_grimoire/domain/controllers/auth_controller.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -16,9 +15,32 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen>{
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final AuthController _authController =AuthController();
 
 
-  @override
+  Future<void> _login() async{
+    final email=_emailController.text.trim();
+    final password =_passwordController.text.trim();
+
+
+    if (email.isEmpty || password.isEmpty ){
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please fill in all fields"),backgroundColor: AppColors.alert,));
+      return;
+    }
+
+    try{
+      await _authController.login(email: email, password: password);
+      ScaffoldMessenger.of(context).showSnackBar(const  SnackBar(content: Text("Login seccusseful"),backgroundColor: AppColors.success,));
+     
+    }catch(e){
+       ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Registration failed: $e'),backgroundColor: AppColors.alert,));
+    }
+  } 
+
+
+  
  
 
   @override
@@ -74,9 +96,7 @@ class _LoginScreenState extends State<LoginScreen>{
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  onPressed: () {
-                                    // Handle Login
-                                  },
+                                  onPressed: _login,
                                   child: const Text('Login'),
                                 ),
                               ),
