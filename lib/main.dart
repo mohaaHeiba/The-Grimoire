@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:the_grimoire/presentation/screens/auth/register_screen.dart';
+import 'package:the_grimoire/presentation/screens/auth/login_screen.dart';
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -14,6 +14,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: Scaffold(body: RegisterScreen()));
+    return MaterialApp(home: Scaffold(body: const LoginScreen(),),);
   }
 }
