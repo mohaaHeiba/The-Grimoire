@@ -42,6 +42,7 @@ class _LoginScreenState extends State<LoginScreen>{
           child: SingleChildScrollView(       // physics: const BouncingScrollPhysics(),
            child:Padding(padding: const EdgeInsets.all(24),             
                child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     SizedBox(
                       width: size.width                      ,
@@ -80,6 +81,7 @@ class _LoginScreenState extends State<LoginScreen>{
                                 ),
                               ),
                               TextButton(
+                                
                                 onPressed: (){
                                  Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => const RegisterScreen()));
                                 },
