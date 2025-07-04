@@ -71,11 +71,10 @@ class AuthFormFields extends StatelessWidget {
       children: [
         if (showNameFields &&
             firstNameController != null &&
-            lastNameController != null)
-          ...[
-            _buildNameFields(),
-            const SizedBox(height: 16),
-          ],
+            lastNameController != null) ...[
+          _buildNameFields(),
+          const SizedBox(height: 16),
+        ],
         _buildEmailField(),
         const SizedBox(height: 16),
         _buildPasswordField(),

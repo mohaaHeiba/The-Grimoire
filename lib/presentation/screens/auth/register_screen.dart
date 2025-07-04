@@ -5,6 +5,7 @@ import 'package:the_grimoire/presentation/themes/colors.dart';
 import 'package:the_grimoire/presentation/widgets/authformfield.dart';
 import 'package:the_grimoire/presentation/widgets/authheader.dart';
 import 'package:the_grimoire/domain/controllers/auth_controller.dart';
+import 'package:the_grimoire/presentation/widgets/snackbar.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -40,8 +41,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
         lastName.isEmpty ||
         email.isEmpty ||
         password.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please fill in all fields'),backgroundColor: AppColors.alert,),
+      showAppSnackBar(
+        context: context,
+        message: "Please fill in all fields",
+        backgroundColor: AppColors.alert,
       );
       return;
     }
@@ -53,14 +56,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
         email: email,
         password: password,
       );
-        ScaffoldMessenger.of(
+      showAppSnackBar(
+        context: context,
+        message: "Registration successful",
+        backgroundColor: AppColors.success,
+      );
+      Navigator.pushReplacement(
         context,
-      ).showSnackBar(SnackBar(content: Text('Registration successful'),backgroundColor: AppColors.success,));
-     Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => const Home()));
+        MaterialPageRoute(builder: (context) => const Home()),
+      );
     } catch (e) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Registration failed: $e'),backgroundColor: AppColors.alert,));
+      showAppSnackBar(
+        context: context,
+        message: "Registration failed: $e",
+        backgroundColor: AppColors.alert,
+      );
     }
   }
 
@@ -68,60 +78,59 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-    resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: true,
       backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
-          
-          child:
-              
-              Padding(
-                
-                padding: const EdgeInsets.all(24),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    SizedBox(
-                width: size.width,
-                height: 250,
-               child: authheader( 'Login', context),
-              ),
-                    AuthFormFields(
-                      emailController: _emailController,
-                      passwordController: _passwordController,
-                      firstNameController: _firstNameController,
-                      lastNameController: _lastNameController,
-                      showNameFields: true,
-                    ),
-                    const SizedBox(height: 24),
-                    SizedBox(
-                      height: 48,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(255, 38, 8, 82),
-                          foregroundColor: AppColors.textColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          textStyle: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        onPressed: _register,
-                        child: const Text('Register'),
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SizedBox(
+                  width: size.width,
+                  height: 250,
+                  child: authheader('Login', context),
+                ),
+                AuthFormFields(
+                  emailController: _emailController,
+                  passwordController: _passwordController,
+                  firstNameController: _firstNameController,
+                  lastNameController: _lastNameController,
+                  showNameFields: true,
+                ),
+                const SizedBox(height: 24),
+                SizedBox(
+                  height: 48,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 38, 8, 82),
+                      foregroundColor: AppColors.textColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      textStyle: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => const LoginScreen()));
-                      },
-                      child: const Text('Do you have an account? Login'),
-                    ),
-                  ],
+                    onPressed: _register,
+                    child: const Text('Register'),
+                  ),
                 ),
-              
-            
+                TextButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LoginScreen(),
+                      ),
+                    );
+                  },
+                  child: const Text('Do you have an account? Login'),
+                ),
+              ],
+            ),
           ),
         ),
       ),
